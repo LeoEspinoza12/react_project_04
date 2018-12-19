@@ -1,0 +1,31 @@
+
+
+.Controls{
+  position: absolute;
+  width: 50%;
+  height: 80%;
+  
+  margin-top: 8%;
+  margin-left: 25%
+}
+
+.Controls div:nth-child(1) button{
+  width: 50%;
+  height: 10%;
+  background: rgb(88,125,116);
+  margin: 5% auto
+}
+
+.Controls .InputArea {
+  width: 80%;
+  height: 60%;
+  padding: 10px;
+  background: rgb(134,185,173);
+  margin: 5% auto;
+  border-radius: 3px;
+  border: 1px solid rgb(88,125,116)
+}
+
+.Controls .InputArea button{
+  background: rgb(88,125,116);
+}

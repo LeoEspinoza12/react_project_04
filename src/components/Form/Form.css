@@ -1,0 +1,15 @@
+
+
+.InputArea input[type='text']{
+  border-radius: 2px;
+  font-size: 0.89em
+  /* border: none */
+}
+
+.InputArea textarea {
+  font-size: 0.89em;
+}
+
+.InputArea button[type='submit']{
+  font-size: 0.89em;
+}
