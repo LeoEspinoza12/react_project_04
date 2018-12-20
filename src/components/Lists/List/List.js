@@ -13,12 +13,13 @@ const List = (props) => {
               <h5 className="card-title">{props.title.slice(0, 20)}</h5>
               <p className="card-text">{props.body.slice(0, 125)}</p>
               <button 
-                type="submit" 
+                type="button" 
                 className="btn-sm btn-warning float-left"
                 onClick={()=> props.switch('formSwitch', props.id)}>Edit</button>
               <button 
-                type="submit" 
-                className="btn-sm btn-danger pull-right">Delete</button>
+                type="button" 
+                className="btn-sm btn-danger pull-right"
+                onClick={()=> props.delete(props.id)}>Delete</button>
             </div>
           </div>
         </div>

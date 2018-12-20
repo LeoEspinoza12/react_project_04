@@ -2,9 +2,7 @@
 import React from 'react'
 import AuthContext from '../../../UI/Auth-Context'
 
-
 const BtnControl = (props) =>  (
-
 
   <AuthContext.Consumer>
     {switchcontext => {

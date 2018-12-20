@@ -15,7 +15,10 @@ class Main extends Component {
       lists: [],
       btnSwitchHandle: false,
       formSwitch: false,
-      itemNumber: null
+      itemNumber: null,
+      id: null,
+      title: null,
+      body: null
     }
 
   }
@@ -25,9 +28,8 @@ class Main extends Component {
     let sampleData = null
     axios.get('https://jsonplaceholder.typicode.com/posts')
       .then(response => {
-          sampleData = response.data.splice(5, 3)
+        sampleData = response.data.splice(5, 3)
           this.setState({lists: sampleData})
-          console.log(sampleData)
         })
   }
 
@@ -37,19 +39,48 @@ class Main extends Component {
       this.setState(prevState => {
         return { btnSwitchHandle: !prevState.btnSwitchHandle,
                  formSwitch: false,
-                 itemNumber: null
+                 itemNumber: null,
+                 id: null,
+                 title: null,
+                 body: null,
+                 
         }
         })
     } else if (switchItem === 'formSwitch'){
-      this.setState(prevState => {
-        return { formSwitch: !prevState.formSwitch, itemNumber: itemNum }
-      })
+        if(itemNum){
+          axios.get('https://jsonplaceholder.typicode.com/posts/' + itemNum)
+            .then(response => {
+              this.setState({
+                id: response.data.id,
+                title: response.data.title,
+                body: response.data.body
+              })
+            })
+        }
     } 
-   
   }
 
+  // inputChangeHandler
+  onChangeHandler = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  // axios delete data
+  delete = (refNum) => {
+    axios.delete('https://jsonplaceholder.typicode.com/posts/' + refNum)
+      .then(response => {
+        if(response.status === 200){
+          let newList = this.state.lists.filter((list)=>{
+            return list.id !== refNum
+          })
+          this.setState({lists: newList})
+        }
+      })
+  }
+
+
+
   render(){
-    
     return(
       <div className='Main'>
         <section className='SectionOne'>
@@ -57,8 +88,10 @@ class Main extends Component {
             value={{switch: this.state.btnSwitchHandle, 
             btnSwitch: this.switchToggleHandler}}>
               <Controls 
-                formSwitch={this.state.formSwitch}
-                itemNumber={this.state.itemNumber}/>
+                change={this.onChangeHandler}
+                id={this.state.id}
+                title={this.state.title}
+                body={this.state.body}/>
           </AuthContext.Provider>
         </section>
         <section className='SectionTwo'>
@@ -66,8 +99,8 @@ class Main extends Component {
             value={{switch: this.state.btnSwitchHandle}}>
               <Lists
                 lists={this.state.lists}
-                switch={this.switchToggleHandler}/>
-
+                switch={this.switchToggleHandler}
+                delete={this.delete}/>
           </AuthContext.Provider>
         </section>
       </div>
