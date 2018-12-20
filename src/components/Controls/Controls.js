@@ -1,5 +1,5 @@
 
-import React, {Component} from 'react'
+import React from 'react'
 import BtnControl from './BtnControl/BtnControl'
 import Form from '../Form/Form'
 // import axios from 'axios'
